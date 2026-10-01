@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Simulator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- 1. Header -->
+        <div class="app-header">
+            <h1> CPU Scheduling Simulator</h1>
+            <p>จำลองและเปรียบเทียบการจัดตารางงาน (FCFS, Round Robin)</p>
+        </div>
+
+        <!-- 2. Top Controls -->
+        <div class="top-controls-grid">
+            <!-- 2.1 Seed Card -->
+            <div class="control-card">
+                <div class="card-title">
+                    <i class="fas fa-save"></i> บันทึก / โหลดข้อมูล (Seed)
+                </div>
+                <div class="card-subtitle">ใช้ Code ด้านล่างเพื่อดึงโจทย์เดิมกลับมา</div>
+                <input type="text" id="seedInput" class="custom-input mb-3" placeholder="วาง Seed Data ตรงนี้...">
+                <div class="btn-group">
+                    <button class="btn btn-export" onclick="exportSeed()">Export โจทย์</button>
+                    <button class="btn btn-import" onclick="importSeed()">Import โจทย์</button>
+                </div>
+            </div>
+            
+            <!-- 2.2 Time Quantum Card -->
+            <div class="control-card text-center">
+                <div class="card-title justify-content-center text-primary">
+                    <i class="fas fa-stopwatch"></i> Time Quantum (q)
+                </div>
+                <div class="card-subtitle text-primary">สำหรับ Round Robin (1-4)</div>
+                <input type="number" id="timeQuantum" class="custom-input text-center fs-3 mt-2 fw-bold" min="1" max="4" value="2">
+            </div>
+
+            <!-- 2.3 Calculate Button -->
+            <div class="control-card d-flex align-items-center justify-content-center border-0 bg-transparent shadow-none" style="padding: 0;">
+                <button class="btn btn-calculate" onclick="calculateAll()">
+                    <i class="fas fa-bolt"></i> คำนวณผลลัพธ์
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Task List Card (แสดงโจทย์ก่อน) -->
+        <div class="task-list-card">
+            <div class="task-list-header">
+                <h2>รายการงาน (Processes)</h2>
+                <div class="action-buttons">
+                    <button class="btn btn-random" onclick="randomizeTasks()"><i class="fas fa-dice"></i> สุ่มโจทย์ใหม่</button>
+                    <button class="btn btn-add" onclick="addTask()"><i class="fas fa-plus"></i> เพิ่มงานใหม่</button>
+                    <button class="btn btn-clear" onclick="clearTasks()">ล้างข้อมูล</button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th width="90">Process</th>
+                            <th>รายละเอียดงาน</th>
+                            <th width="150">Arrival Time (AT)</th>
+                            <th width="150">Burst Time (BT)</th>
+                            <th width="90">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskTableBody">
+                        <!-- แถวข้อมูลงานจะถูกสร้างขึ้นด้วย JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. Results Section (จะซ่อนไว้ และแสดงหลังกดคำนวณ) -->
+        <div id="resultsSection" style="display: none;">
+            <div class="results-header">
+                <h2> ผลการวิเคราะห์ (Analysis Results)</h2>
+            </div>
+
+            <!-- FCFS Result -->
+            <div class="result-card">
+                <h3>1. First-Come, First-Served (FCFS)</h3>
+                <div class="gantt-container" id="ganttFCFS"></div>
+                <div class="table-container mt-3">
+                    <table class="result-table" id="tableFCFS">
+                        <thead><tr><th>Process</th><th>AT</th><th>BT</th><th>CT</th><th>TAT</th><th>WT</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="avg-metrics">
+                    <div class="metric">Avg TAT: <span id="avgTatFCFS">0</span></div>
+                    <div class="metric">Avg WT: <span id="avgWtFCFS">0</span></div>
+                </div>
+            </div>
+
+            <!-- RR Result -->
+            <div class="result-card">
+                <h3>2. Round Robin (RR) <span id="rrQTitle" class="badge">q=2</span></h3>
+                <div class="gantt-container" id="ganttRR"></div>
+                <div class="table-container mt-3">
+                    <table class="result-table" id="tableRR">
+                        <thead><tr><th>Process</th><th>AT</th><th>BT</th><th>CT</th><th>TAT</th><th>WT</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="avg-metrics">
+                    <div class="metric">Avg TAT: <span id="avgTatRR">0</span></div>
+                    <div class="metric">Avg WT: <span id="avgWtRR">0</span></div>
+                </div>
+            </div>
+
+            <!-- Comparison Chart & Analysis -->
+            <div class="result-card">
+                <h3><i class="fas fa-chart-bar text-primary"></i> เปรียบเทียบประสิทธิภาพ (Average Waiting Time)</h3>
+                
+                <!-- Stat Summary Cards -->
+                <div class="comparison-summary-grid">
+                    <div class="stat-card" id="cardFcfs">
+                        <div class="stat-title">FCFS</div>
+                        <div class="stat-value" id="compWtFCFS">0.00</div>
+                        <div class="stat-unit">หน่วยเวลา (WT เฉลี่ย)</div>
+                        <div class="stat-badge" id="badgeFcfs">-</div>
+                    </div>
+                    <div class="stat-card" id="cardRr">
+                        <div class="stat-title">Round Robin (<span id="compRrQ">q=2</span>)</div>
+                        <div class="stat-value" id="compWtRR">0.00</div>
+                        <div class="stat-unit">หน่วยเวลา (WT เฉลี่ย)</div>
+                        <div class="stat-badge" id="badgeRr">-</div>
+                    </div>
+                </div>
+
+                <!-- Chart Box -->
+                <div class="chart-wrapper">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+
+                <!-- Analysis & Explanation Box -->
+                <div class="analysis-box" id="analysisBox">
+                    <div class="analysis-title">
+                        <i class="fas fa-lightbulb text-warning"></i> บทวิเคราะห์และคำอธิบายผลลัพธ์
+                    </div>
+                    <div class="analysis-content" id="analysisContent">
+                        <!-- ข้อความอธิบายจะสร้างอัตโนมัติจากผลการคำนวณ -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
