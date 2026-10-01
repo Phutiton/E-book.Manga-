@@ -17,7 +17,8 @@ body {
     font-family: 'Sarabun', sans-serif;
     background-color: var(--bg-color);
     background-image: radial-gradient(var(--dot-color) 2px, transparent 2px);
-    background-size: 30px 30px; /* ลายจุดพื้นหลัง */
+    background-size: 30px 30px;
+    /* ลายจุดพื้นหลัง */
     color: var(--text-main);
     padding: 30px 20px;
 }
@@ -31,18 +32,53 @@ body {
 }
 
 /* ---------------- CSS Utilities ---------------- */
-.mb-3 { margin-bottom: 1rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-2 { margin-top: 0.5rem; }
-.text-center { text-align: center; }
-.text-primary { color: #0284c7; }
-.fw-bold { font-weight: 700; }
-.fs-3 { font-size: 1.75rem; }
-.d-flex { display: flex; }
-.align-items-center { align-items: center; }
-.justify-content-center { justify-content: center; }
-.bg-transparent { background-color: transparent !important; }
-.shadow-none { box-shadow: none !important; }
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-primary {
+    color: #0284c7;
+}
+
+.fw-bold {
+    font-weight: 700;
+}
+
+.fs-3 {
+    font-size: 1.75rem;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
 
 /* ---------------- Header ---------------- */
 .app-header {
@@ -58,7 +94,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 10px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .app-header p {
@@ -75,10 +111,14 @@ body {
 }
 
 @media (max-width: 800px) {
-    .top-controls-grid { grid-template-columns: 1fr; }
+    .top-controls-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.control-card, .task-list-card, .result-card {
+.control-card,
+.task-list-card,
+.result-card {
     background: var(--card-bg);
     border-radius: 16px;
     padding: 25px;
@@ -133,15 +173,36 @@ body {
     font-size: 0.95rem;
 }
 
-.btn:active { transform: scale(0.97); }
+.btn:active {
+    transform: scale(0.97);
+}
 
-.btn-group { display: flex; gap: 10px; }
-.btn-group .btn { flex: 1; }
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
 
-.btn-export { background: #d1fae5; color: #065f46; }
-.btn-export:hover { background: #a7f3d0; }
-.btn-import { background: #e0f2fe; color: #075985; }
-.btn-import:hover { background: #bae6fd; }
+.btn-group .btn {
+    flex: 1;
+}
+
+.btn-export {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.btn-export:hover {
+    background: #a7f3d0;
+}
+
+.btn-import {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.btn-import:hover {
+    background: #bae6fd;
+}
 
 .btn-calculate {
     background: linear-gradient(to right, #fb923c, #f43f5e);
@@ -153,17 +214,38 @@ body {
     border-radius: 16px;
     box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.3);
 }
+
 .btn-calculate:hover {
     box-shadow: 0 15px 20px -3px rgba(244, 63, 94, 0.4);
     transform: translateY(-3px);
 }
 
-.btn-random { background: #8b5cf6; color: white; }
-.btn-random:hover { background: #7c3aed; }
-.btn-add { background: #10b981; color: white; }
-.btn-add:hover { background: #059669; }
-.btn-clear { background: #ffe4e6; color: #be123c; }
-.btn-clear:hover { background: #fecdd3; }
+.btn-random {
+    background: #8b5cf6;
+    color: white;
+}
+
+.btn-random:hover {
+    background: #7c3aed;
+}
+
+.btn-add {
+    background: #10b981;
+    color: white;
+}
+
+.btn-add:hover {
+    background: #059669;
+}
+
+.btn-clear {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.btn-clear:hover {
+    background: #fecdd3;
+}
 
 /* ---------------- Task List Table ---------------- */
 .task-list-header {
@@ -174,11 +256,26 @@ body {
     padding-bottom: 15px;
     border-bottom: 2px dashed var(--border-color);
 }
-.task-list-header h2 { font-size: 1.5rem; color: #0f172a; }
-.action-buttons { display: flex; gap: 10px; }
 
-.table-container { overflow-x: auto; }
-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+.task-list-header h2 {
+    font-size: 1.5rem;
+    color: #0f172a;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
 
 th {
     text-align: center;
@@ -205,6 +302,7 @@ td:first-child {
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
 }
+
 td:last-child {
     border-right: 1px solid var(--border-color);
     border-top-right-radius: 12px;
@@ -221,16 +319,40 @@ td:last-child {
     border-radius: 12px;
     font-weight: 800;
     color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.p-bg-1 { background: linear-gradient(135deg, #f87171, #ef4444); }
-.p-bg-2 { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
-.p-bg-3 { background: linear-gradient(135deg, #34d399, #10b981); }
-.p-bg-4 { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
-.p-bg-5 { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
-.p-bg-6 { background: linear-gradient(135deg, #f472b6, #ec4899); }
-.p-bg-7 { background: linear-gradient(135deg, #22d3ee, #06b6d4); }
-.p-bg-8 { background: linear-gradient(135deg, #a3e635, #84cc16); }
+
+.p-bg-1 {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+}
+
+.p-bg-2 {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+.p-bg-3 {
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.p-bg-4 {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.p-bg-5 {
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+}
+
+.p-bg-6 {
+    background: linear-gradient(135deg, #f472b6, #ec4899);
+}
+
+.p-bg-7 {
+    background: linear-gradient(135deg, #22d3ee, #06b6d4);
+}
+
+.p-bg-8 {
+    background: linear-gradient(135deg, #a3e635, #84cc16);
+}
 
 /* Inputs ในตาราง */
 .table-input {
@@ -244,7 +366,11 @@ td:last-child {
     outline: none;
     transition: all 0.2s;
 }
-.table-input.text-left { text-align: left; }
+
+.table-input.text-left {
+    text-align: left;
+}
+
 .table-input:focus {
     border-color: #94a3b8;
     box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.2);
@@ -260,6 +386,7 @@ td:last-child {
     transition: all 0.2s;
     border-radius: 8px;
 }
+
 .btn-delete:hover {
     background-color: #fee2e2;
     transform: scale(1.1);
@@ -273,7 +400,9 @@ td:last-child {
     font-size: 1.8rem;
 }
 
-.result-card { margin-bottom: 25px; }
+.result-card {
+    margin-bottom: 25px;
+}
 
 .result-card h3 {
     margin-bottom: 20px;
@@ -309,7 +438,7 @@ td:last-child {
     justify-content: center;
     align-items: center;
     min-width: 45px;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     margin-right: -1px;
     position: relative;
     font-weight: 700;
@@ -321,7 +450,7 @@ td:last-child {
 .gantt-block:hover {
     transform: scaleY(1.08);
     z-index: 10;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .gantt-block.idle {
@@ -331,33 +460,54 @@ td:last-child {
     border: 2px dashed #cbd5e1;
 }
 
-.gantt-time-start, .gantt-time-end {
+.gantt-time-start,
+.gantt-time-end {
     position: absolute;
     bottom: -25px;
     font-size: 0.85rem;
     color: #64748b;
     font-weight: 600;
 }
-.gantt-time-start { left: -5px; }
-.gantt-time-end { right: -5px; }
+
+.gantt-time-start {
+    left: -5px;
+}
+
+.gantt-time-end {
+    right: -5px;
+}
 
 /* ---------------- Result Table (ตารางเฉลย) ---------------- */
 .result-table {
     border-spacing: 0;
     border-collapse: collapse;
 }
-.result-table th, .result-table td {
+
+.result-table th,
+.result-table td {
     border: 1px solid var(--border-color);
     border-radius: 0;
 }
+
 .result-table th {
     background: #f1f5f9;
     color: #334155;
     padding: 12px;
 }
-.result-table td { padding: 12px; font-size: 1rem; }
-.result-table tbody tr { box-shadow: none; border-radius: 0; }
-.result-table tbody tr:hover { background-color: #f8fafc; }
+
+.result-table td {
+    padding: 12px;
+    font-size: 1rem;
+}
+
+.result-table tbody tr {
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.result-table tbody tr:hover {
+    background-color: #f8fafc;
+}
 
 .avg-metrics {
     display: flex;
@@ -386,7 +536,9 @@ td:last-child {
 }
 
 @media (max-width: 650px) {
-    .comparison-summary-grid { grid-template-columns: 1fr; }
+    .comparison-summary-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .stat-card {
